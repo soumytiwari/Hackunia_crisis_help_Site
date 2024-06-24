@@ -184,6 +184,21 @@ section {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
+#invasion-status h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    margin-top: 50%;
+}
+
+#invasion-status #tatus-display {
+    font-size: 0.6rem;
+}
+
+#resources h2 {
+    font-size: 1.6rem;
+    margin-top: 30%;
+    margin-bottom: 5.5%;
+}
 
 .card-container {
     display: flex;
@@ -191,7 +206,6 @@ section {
     flex-wrap: wrap;
     gap: 20px;
 }
-
 
 .card {
     padding: 20px;
@@ -201,6 +215,8 @@ section {
     overflow: hidden;
     margin: 15px 20px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    max-width: 300px;
+    width: 230px;
 }
 
 body.dark-mode .card {
@@ -213,6 +229,37 @@ body.bright-mode .card {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.card h3 {
+    margin-bottom: 12px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body.dark-mode .card h3 {
+    color: #000;
+}
+
+.card p {
+    margin-bottom: 12px;
+    font-family: italic;
+    color: #e7dede;;
+}
+
+body.dark-mode .card p {
+    color: #6d5251;
+}
+
+.card a {
+    text-decoration: none;
+    color: #7b6aea;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+body.dark-mode .card a {
+    color: #282636;
+}
 
 #contact {
     text-align: center;
@@ -221,11 +268,13 @@ body.bright-mode .card {
 
 #contact h2 {
     font-size: 1.6rem;
-    margin: 20px auto;
+    margin-top: 34%;
+    margin-bottom: 2%;
 }
 
 #contact p {
-    margin-bottom: 30px;
+    margin-bottom: 12%;
+    margin-top: 4%;
 }
 
 #contact a {
@@ -295,16 +344,8 @@ body.bright-mode .card {
     margin-right: 17px;
 }
 
-#ai-container button:last-child {
-    background-color: #f44336; /* Red for close button */
-}
-
 #ai-container button:hover {
     background-color: #3e2b64;
-}
-
-#ai-container button:last-child:hover {
-    background-color: #e53935; /* Darker red for close button */
 }
 
 #ai-response {

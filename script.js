@@ -39,6 +39,23 @@ activateAIBtn.addEventListener('click', () => {
 
     const aiCloseBtn = document.createElement('button');
     aiCloseBtn.textContent = 'Close';
+    aiCloseBtn.style.backgroundColor = '#f44336'; // Red for close button
+    aiCloseBtn.style.color = '#fff';
+    aiCloseBtn.style.border = 'none';
+    aiCloseBtn.style.padding = '10px 20px';
+    aiCloseBtn.style.borderRadius = '5px';
+    aiCloseBtn.style.cursor = 'pointer';
+    aiCloseBtn.style.transition = 'all 0.3s ease';
+    aiCloseBtn.style.marginRight = '10px';
+
+    aiCloseBtn.addEventListener('mouseover', () => {
+        aiCloseBtn.style.backgroundColor = '#e53935'; // Darker red for close button on hover
+    });
+
+    aiCloseBtn.addEventListener('mouseout', () => {
+        aiCloseBtn.style.backgroundColor = '#f44336'; // Red for close button
+    });
+
     aiContainer.appendChild(aiCloseBtn);
 
     const aiResponse = document.createElement('p');
