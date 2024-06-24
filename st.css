@@ -290,12 +290,21 @@ body.bright-mode .card {
     transition: all 0.3s ease;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     position: relative;
-    left: 35%;
+    left: 26%;
     top: 17px;
+    margin-right: 17px;
+}
+
+#ai-container button:last-child {
+    background-color: #f44336; /* Red for close button */
 }
 
 #ai-container button:hover {
     background-color: #3e2b64;
+}
+
+#ai-container button:last-child:hover {
+    background-color: #e53935; /* Darker red for close button */
 }
 
 #ai-response {

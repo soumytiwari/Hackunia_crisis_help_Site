@@ -1,4 +1,3 @@
-
 // Get the join button, invasion status display, and AI activation button elements
 const joinBtn = document.getElementById('join-btn');
 const statusDisplay = document.getElementById('status-display');
@@ -6,7 +5,9 @@ const activateAIBtn = document.getElementById('activate-ai');
 
 // Simulate invasion status update
 function updateInvasionStatus() {
-    const status = Math.random() < 0.5 ? 'Under Attack' : 'Safe for Now';
+    const statuses = ['Under Attack', 'Safe for Now', 'Evacuating', 'All Clear', 'High Alert'];
+    const randomIndex = Math.floor(Math.random() * statuses.length);
+    const status = statuses[randomIndex];
     statusDisplay.textContent = `Invasion Status: ${status}`;
 }
 
@@ -36,6 +37,10 @@ activateAIBtn.addEventListener('click', () => {
     aiSubmitBtn.textContent = 'Submit';
     aiContainer.appendChild(aiSubmitBtn);
 
+    const aiCloseBtn = document.createElement('button');
+    aiCloseBtn.textContent = 'Close';
+    aiContainer.appendChild(aiCloseBtn);
+
     const aiResponse = document.createElement('p');
     aiResponse.id = 'ai-response';
     aiContainer.appendChild(aiResponse);
@@ -49,6 +54,10 @@ activateAIBtn.addEventListener('click', () => {
             const response = `Thank you for your query: "${query}". Our AI is currently analyzing the situation and will provide a response shortly.`;
             aiResponse.textContent = response;
         }
+    });
+
+    aiCloseBtn.addEventListener('click', () => {
+        document.body.removeChild(aiContainer);
     });
 });
 
@@ -86,7 +95,6 @@ const body = document.querySelector('body');
 const toggleModeBtn = document.querySelector('#toggle-mode-btn');
 
 toggleModeBtn.addEventListener('click', () => {
-  body.classList.toggle('bright-mode');
+    body.classList.toggle('bright-mode');
+    body.classList.toggle('dark-mode');
 });
-
-
