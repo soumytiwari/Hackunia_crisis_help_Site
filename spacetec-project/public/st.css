@@ -261,6 +261,87 @@ body.dark-mode .card a {
     color: #282636;
 }
 
+/* chat bot */
+#chatbot h2 {
+    font-size: 1.6rem;
+    margin-top: 34%;
+    margin-bottom: 2%;
+}
+
+#chat-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: rgb(134, 250, 1);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 850px;
+    margin: 20px auto;
+    position: relative;
+}
+
+#chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 30px;
+    border: 1px solid #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#chat-container .ib {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+#chat-input {
+    width: calc(100% - 90px);
+    padding: 11.3px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background-color: #cbcdf2;
+}
+
+#send-chat-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #7d4caf;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#send-chat-btn:hover {
+    background-color: #4945a0;
+}
+
+/* Chatbot chat-message styles */
+#chat-messages .chat-message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+}
+
+#chat-messages .chat-message strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #f39c12;
+}
+
+body.bright-mode #chat-messages .chat-message {
+    background-color: #ddd;
+    color: #333;
+}
+
+body.bright-mode #chat-messages .chat-message strong {
+    color: #d35400;
+}
+
+/* chat bot */
+
 #contact {
     text-align: center;
     margin-top: 40px;
@@ -377,3 +458,77 @@ footer {
     transform: translateX(-50%);
 }
 
+
+/* Tablet styles */
+@media (min-width: 600px) and (max-width: 991px) {
+    body {
+        font-size: 16px;
+    }
+
+    main {
+        width: 80%;
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .card {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+
+    #hero p {
+        font-size: 1.2rem;
+    }
+
+    #toggle-mode-btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
+
+/* Smartphone styles */
+@media (max-width: 599px) {
+    body {
+        font-size: 14px;
+    }
+
+    main {
+        width: 90%;
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .card {
+        width: 90%;
+        margin: 10px 0;
+    }
+
+    #hero h1 {
+        font-size: 2rem;
+    }
+
+    #hero p {
+        font-size: 1rem;
+    }
+
+    #toggle-mode-btn {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+}

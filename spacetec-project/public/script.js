@@ -1,3 +1,44 @@
+// Chatbot functionality
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const sendChatBtn = document.getElementById('send-chat-btn');
+
+sendChatBtn.addEventListener('click', async () => {
+    const userMessage = chatInput.value.trim();
+    if (userMessage) {
+        addChatMessage('User', userMessage);
+        chatInput.value = '';
+        try {
+            const response = await fetch('/get-ai-response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userMessage }),
+            });
+            const data = await response.json();
+            addChatMessage('SpaceTec', data.response);
+        } catch (error) {
+            console.error('Error:', error);
+            addChatMessage('SpaceTec', 'Sorry, there was an error processing your request.');
+        }
+    }
+});
+
+chatInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        sendChatBtn.click();
+    }
+});
+
+function addChatMessage(sender, message) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('chat-message');
+    messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
 // Get the join button, invasion status display, and AI activation button elements
 const joinBtn = document.getElementById('join-btn');
 const statusDisplay = document.getElementById('status-display');
@@ -39,7 +80,7 @@ activateAIBtn.addEventListener('click', () => {
 
     const aiCloseBtn = document.createElement('button');
     aiCloseBtn.textContent = 'Close';
-    aiCloseBtn.style.backgroundColor = '#f44336'; // Red for close button
+    aiCloseBtn.style.backgroundColor = '#f44336';
     aiCloseBtn.style.color = '#fff';
     aiCloseBtn.style.border = 'none';
     aiCloseBtn.style.padding = '10px 20px';
@@ -49,11 +90,11 @@ activateAIBtn.addEventListener('click', () => {
     aiCloseBtn.style.marginRight = '10px';
 
     aiCloseBtn.addEventListener('mouseover', () => {
-        aiCloseBtn.style.backgroundColor = '#e53935'; // Darker red for close button on hover
+        aiCloseBtn.style.backgroundColor = '#e53935';
     });
 
     aiCloseBtn.addEventListener('mouseout', () => {
-        aiCloseBtn.style.backgroundColor = '#f44336'; // Red for close button
+        aiCloseBtn.style.backgroundColor = '#f44336';
     });
 
     aiContainer.appendChild(aiCloseBtn);
@@ -64,12 +105,23 @@ activateAIBtn.addEventListener('click', () => {
 
     document.body.appendChild(aiContainer);
 
-    aiSubmitBtn.addEventListener('click', () => {
+    aiSubmitBtn.addEventListener('click', async () => {
         const query = aiInput.value.trim();
         if (query) {
-            // Replace this with your AI logic or API integration
-            const response = `Thank you for your query: "${query}". Our AI is currently analyzing the situation and will provide a response shortly.`;
-            aiResponse.textContent = response;
+            try {
+                const response = await fetch('/get-ai-response', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: query }),
+                });
+                const data = await response.json();
+                aiResponse.textContent = data.response;
+            } catch (error) {
+                console.error('Error:', error);
+                aiResponse.textContent = 'Sorry, there was an error processing your request.';
+            }
         }
     });
 
@@ -81,7 +133,7 @@ activateAIBtn.addEventListener('click', () => {
 // bubble
 document.addEventListener('DOMContentLoaded', () => {
     const bubbleContainer = document.getElementById('bubble-container');
-    const bubbleImageSrc = 'https://media.gettyimages.com/id/518493243/photo/bubble.jpg?s=612x612&w=0&k=20&c=4jEVfufIXw6a_EQhg5F4Pcgodj90pIay_lufy5itePY='; // Replace with your image URL
+    const bubbleImageSrc = 'https://media.gettyimages.com/id/518493243/photo/bubble.jpg?s=612x612&w=0&k=20&c=4jEVfufIXw6a_EQhg5F4Pcgodj90pIay_lufy5itePY=';
     const numberOfBubbles = 20;
 
     function createBubble() {
