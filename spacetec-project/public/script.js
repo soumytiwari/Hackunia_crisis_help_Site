@@ -160,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize the map
     const map = L.map('map').setView([51.505, -0.09], 2); // Centered on the world view
+    // const map = L.map('map').setView([0, 0], 2); // Centered on the world view
 
     // Set up the OSM layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -183,36 +184,90 @@ document.addEventListener('DOMContentLoaded', () => {
         popupAnchor: [0, -32] // point from which the popup should open relative to the iconAnchor
     });
 
-    // Define safe zones and alien-infected areas with range
-    const locations = [
-        { lat: 40.712776, lon: -74.005974, type: 'safe', name: 'New York Safe Zone', range: 5000 },
-        { lat: 34.052235, lon: -118.243683, type: 'infected', name: 'Los Angeles Alien Infected', range: 8000 },
-        { lat: 51.507351, lon: -0.127758, type: 'safe', name: 'London Safe Zone', range: 4000 },
-        { lat: 35.689487, lon: 139.691711, type: 'infected', name: 'Tokyo Alien Infected', range: 6000 },
-        { lat: 28.704060, lon: 77.102493, type: 'safe', name: 'Delhi Safe Zone', range: 7000 },
-        { lat: 55.755825, lon: 37.617298, type: 'infected', name: 'Moscow Alien Infected', range: 9000 },
-        { lat: -33.868820, lon: 151.209296, type: 'safe', name: 'Sydney Safe Zone', range: 4500 },
-        { lat: -23.550520, lon: -46.633308, type: 'infected', name: 'São Paulo Alien Infected', range: 10000 },
-        { lat: 39.904202, lon: 116.407394, type: 'infected', name: 'Beijing Alien Infected', range: 8500 },
-        { lat: 19.432608, lon: -99.133209, type: 'safe', name: 'Mexico City Safe Zone', range: 3000 }
-    ];
 
-    // Add markers and circles to the map
-    locations.forEach(location => {
-        const marker = L.marker([location.lat, location.lon], {
-            icon: location.type === 'safe' ? safeIcon : unsafeIcon
-        }).addTo(map);
+    let markers = [];
 
-        marker.bindPopup(`<b>${location.name}</b><br>${location.type === 'safe' ? 'Safe Zone' : 'Alien Infected Area'}`);
+    function getRandomCoordinates() {
+        const lat = Math.random() * 180 - 90;
+        const lon = Math.random() * 360 - 180;
+        return [lat, lon];
+    }
 
-        // Add circles to indicate range
-        const circle = L.circle([location.lat, location.lon], {
-            color: location.type === 'safe' ? 'green' : 'red',
-            fillColor: location.type === 'safe' ? '#0f0' : '#f03',
-            fillOpacity: 0.5,
-            radius: location.range
-        }).addTo(map);
-    });
+    function getRandomInterval() {
+        const intervals = [1, 2, 15, 30, 60, 120];
+        return intervals[Math.floor(Math.random() * intervals.length)] * 60 * 1000;
+    }
+
+    function updateMap() {
+        // Clear existing markers
+        markers.forEach(marker => map.removeLayer(marker));
+        markers = [];
+
+        // Random number of locations
+        const numLocations = Math.floor(Math.random() * 10) + 5;
+
+        for (let i = 0; i < numLocations; i++) {
+            const [lat, lon] = getRandomCoordinates();
+            const type = Math.random() > 0.5 ? 'safe' : 'infected';
+            const name = type === 'safe' ? `Safe Zone ${i+1}` : `Alien Infected Area ${i+1}`;
+            const range = Math.random() * 10000 + 1000;
+
+            const marker = L.marker([lat, lon], {
+                icon: type === 'safe' ? safeIcon : unsafeIcon
+            }).addTo(map);
+
+            marker.bindPopup(`<b>${name}</b><br>${type === 'safe' ? 'Safe Zone' : 'Alien Infected Area'}`);
+
+            const circle = L.circle([lat, lon], {
+                color: type === 'safe' ? 'green' : 'red',
+                fillColor: type === 'safe' ? '#0f0' : '#f03',
+                fillOpacity: 0.5,
+                radius: range
+            }).addTo(map);
+
+            markers.push(marker);
+            markers.push(circle);
+        }
+
+        // Schedule the next update
+        setTimeout(updateMap, getRandomInterval());
+    }
+
+    // Initial map update
+    updateMap();
+
+
+
+    // // Define safe zones and alien-infected areas with range
+    // const locations = [
+    //     { lat: 40.712776, lon: -74.005974, type: 'safe', name: 'New York Safe Zone', range: 5000 },
+    //     { lat: 34.052235, lon: -118.243683, type: 'infected', name: 'Los Angeles Alien Infected', range: 8000 },
+    //     { lat: 51.507351, lon: -0.127758, type: 'safe', name: 'London Safe Zone', range: 4000 },
+    //     { lat: 35.689487, lon: 139.691711, type: 'infected', name: 'Tokyo Alien Infected', range: 6000 },
+    //     { lat: 28.704060, lon: 77.102493, type: 'safe', name: 'Delhi Safe Zone', range: 7000 },
+    //     { lat: 55.755825, lon: 37.617298, type: 'infected', name: 'Moscow Alien Infected', range: 9000 },
+    //     { lat: -33.868820, lon: 151.209296, type: 'safe', name: 'Sydney Safe Zone', range: 4500 },
+    //     { lat: -23.550520, lon: -46.633308, type: 'infected', name: 'São Paulo Alien Infected', range: 10000 },
+    //     { lat: 39.904202, lon: 116.407394, type: 'infected', name: 'Beijing Alien Infected', range: 8500 },
+    //     { lat: 19.432608, lon: -99.133209, type: 'safe', name: 'Mexico City Safe Zone', range: 3000 }
+    // ];
+
+    // // Add markers and circles to the map
+    // locations.forEach(location => {
+    //     const marker = L.marker([location.lat, location.lon], {
+    //         icon: location.type === 'safe' ? safeIcon : unsafeIcon
+    //     }).addTo(map);
+
+    //     marker.bindPopup(`<b>${location.name}</b><br>${location.type === 'safe' ? 'Safe Zone' : 'Alien Infected Area'}`);
+
+    //     // Add circles to indicate range
+    //     const circle = L.circle([location.lat, location.lon], {
+    //         color: location.type === 'safe' ? 'green' : 'red',
+    //         fillColor: location.type === 'safe' ? '#0f0' : '#f03',
+    //         fillOpacity: 0.5,
+    //         radius: location.range
+    //     }).addTo(map);
+    // });
         
     // locations.forEach(location => {
     //     const marker = L.marker([location.lat, location.lon]).addTo(map);
