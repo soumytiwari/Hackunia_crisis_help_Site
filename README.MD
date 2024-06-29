@@ -72,9 +72,6 @@ We welcome contributions to enhance Hackunia_Crisis_Guide. Here’s how you can 
 7. **Create a Pull Request:** Go to the original repository and click on 'New Pull Request'. 
 
 ## Contact
-If you have any questions or suggestions, feel free to contact me at [your-email@example.com].
+If you have any questions or suggestions, feel free to contact me at my linkedin account: https://www.linkedin.com/in/soumya-tiwari0/.
 
 Thank you for checking out Hackunia_Crisis_Guide. Let's join forces and fight the alien invasion together!
-```
-
-Feel free to modify the text to better suit your project's details and your preferences.
