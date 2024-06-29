@@ -133,6 +133,7 @@ header {
     transform: translateX(-50%);
     top: 7%;
 }
+
 nav ul {
     list-style-type: none;
     margin: 0;
@@ -144,6 +145,13 @@ nav ul {
 
 nav li {
     margin-right: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+nav li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 nav a {
