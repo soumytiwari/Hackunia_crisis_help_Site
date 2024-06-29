@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpaceTec: Defending Planet Hackunia</title>
+    <title>Flux Defense Hub | SpaceTec: Defending Planet Hackunia</title>
     <link rel="stylesheet" href="st.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- for map-service -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </head>
 <body class="dark-mode">
     <div id="sphere" class="scroll-wrapper dark-mode">
@@ -56,6 +59,13 @@
                     </div>
                 </div>
             </section>
+
+            
+            <section id="map-section">
+                <h2>Alien Invasion Map</h2>
+                <div id="map" style="height: 500px;"></div>
+            </section>
+            
 
             <section id="chatbot">
                 <h2>Chat with SpaceTec</h2>

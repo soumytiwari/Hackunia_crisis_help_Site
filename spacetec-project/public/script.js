@@ -157,6 +157,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     generateBubbles();
     setInterval(generateBubbles, 5000);
+
+    // Initialize the map
+    const map = L.map('map').setView([51.505, -0.09], 2); // Centered on the world view
+
+    // Set up the OSM layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Custom icons for safe and unsafe zones
+    const safeIcon = L.icon({
+        iconUrl: 'https://static.vecteezy.com/system/resources/thumbnails/010/977/110/small_2x/blue-gradient-circle-free-png.png', 
+        iconSize: [32, 32], // size of the icon
+        iconAnchor: [16, 32], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -32] // point from which the popup should open relative to the iconAnchor
+    });
+
+    const unsafeIcon = L.icon({
+        // iconUrl: 'https://media.gettyimages.com/id/1468131701/vector/abstract-design-with-circles-and-purple-gradients-trendy-background.jpg?s=612x612&w=0&k=20&c=ECQTt3KNH2LhAzlMP6ZWGrf0EG7YKxFd3K2thSlu8vM=', 
+        iconUrl: 'https://th.bing.com/th/id/OIP.UJxqkVHFPLtwc2E6qcTuxQAAAA?rs=1&pid=ImgDetMain',  
+        // iconUrl: '/assets/red_spot.png',
+        iconSize: [32, 32], // size of the icon
+        iconAnchor: [16, 32], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -32] // point from which the popup should open relative to the iconAnchor
+    });
+
+    // Define safe zones and alien-infected areas with range
+    const locations = [
+        { lat: 40.712776, lon: -74.005974, type: 'safe', name: 'New York Safe Zone', range: 5000 },
+        { lat: 34.052235, lon: -118.243683, type: 'infected', name: 'Los Angeles Alien Infected', range: 8000 },
+        { lat: 51.507351, lon: -0.127758, type: 'safe', name: 'London Safe Zone', range: 4000 },
+        { lat: 35.689487, lon: 139.691711, type: 'infected', name: 'Tokyo Alien Infected', range: 6000 },
+        { lat: 28.704060, lon: 77.102493, type: 'safe', name: 'Delhi Safe Zone', range: 7000 },
+        { lat: 55.755825, lon: 37.617298, type: 'infected', name: 'Moscow Alien Infected', range: 9000 },
+        { lat: -33.868820, lon: 151.209296, type: 'safe', name: 'Sydney Safe Zone', range: 4500 },
+        { lat: -23.550520, lon: -46.633308, type: 'infected', name: 'São Paulo Alien Infected', range: 10000 },
+        { lat: 39.904202, lon: 116.407394, type: 'infected', name: 'Beijing Alien Infected', range: 8500 },
+        { lat: 19.432608, lon: -99.133209, type: 'safe', name: 'Mexico City Safe Zone', range: 3000 }
+    ];
+
+    // Add markers to the map
+    // locations.forEach(location => {
+    //     const marker = L.marker([location.lat, location.lon]).addTo(map);
+    //     marker.bindPopup(`<b>${location.name}</b><br>${location.type === 'safe' ? 'Safe Zone' : 'Alien Infected Area'}`);
+    // });
+
+    // Add markers and circles to the map
+    locations.forEach(location => {
+        const marker = L.marker([location.lat, location.lon], {
+            icon: location.type === 'safe' ? safeIcon : unsafeIcon
+        }).addTo(map);
+
+        marker.bindPopup(`<b>${location.name}</b><br>${location.type === 'safe' ? 'Safe Zone' : 'Alien Infected Area'}`);
+
+        // Add circles to indicate range
+        const circle = L.circle([location.lat, location.lon], {
+            color: location.type === 'safe' ? 'green' : 'red',
+            fillColor: location.type === 'safe' ? '#0f0' : '#f03',
+            fillOpacity: 0.5,
+            radius: location.range
+        }).addTo(map);
+    });
+
 });
 
 // mode
