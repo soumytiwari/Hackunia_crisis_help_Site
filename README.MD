@@ -1,6 +1,4 @@
-Sure! Here is a comprehensive README for your GitHub repo:
-
-```markdown
+<!-- ```markdown -->
 # Hackunia_Crisis_Guide
 
 ## Project Overview
