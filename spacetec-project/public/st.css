@@ -214,9 +214,14 @@ section {
     position: relative;
     overflow: hidden;
     margin: 15px 20px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     max-width: 300px;
     width: 230px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .card {
@@ -351,6 +356,12 @@ body.bright-mode #chat-messages .chat-message strong {
     margin-top: 250px;
     margin-bottom: 150px;
     border-radius: 6.5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#map-section:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode #map-section {
@@ -393,6 +404,12 @@ body.bright-mode #map {
     margin-top: 250px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#survival-guide:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 #survival-guide h2 {
