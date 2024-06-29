@@ -387,7 +387,7 @@ body.bright-mode #map {
 /* tips */
 #survival-guide {
     padding: 20px;
-    background-color: #282c34;
+    background-color: #282c34ac;
     color: white;
     border-radius: 6.5px;
     margin-top: 250px;
