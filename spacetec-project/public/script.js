@@ -197,12 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { lat: 19.432608, lon: -99.133209, type: 'safe', name: 'Mexico City Safe Zone', range: 3000 }
     ];
 
-    // Add markers to the map
-    // locations.forEach(location => {
-    //     const marker = L.marker([location.lat, location.lon]).addTo(map);
-    //     marker.bindPopup(`<b>${location.name}</b><br>${location.type === 'safe' ? 'Safe Zone' : 'Alien Infected Area'}`);
-    // });
-
     // Add markers and circles to the map
     locations.forEach(location => {
         const marker = L.marker([location.lat, location.lon], {
@@ -218,6 +212,31 @@ document.addEventListener('DOMContentLoaded', () => {
             fillOpacity: 0.5,
             radius: location.range
         }).addTo(map);
+    });
+        
+    // locations.forEach(location => {
+    //     const marker = L.marker([location.lat, location.lon]).addTo(map);
+    //     marker.bindPopup(`<b>${location.name}</b><br>${location.type === 'safe' ? 'Safe Zone' : 'Alien Infected Area'}`);
+    // });
+
+    // Add survival tips
+    const survivalTips = [
+        "Tip 1: Always keep dogs around you as they scare the aliens.",
+        "Tip 2: Wear bright colors to confuse the aliens.",
+        "Tip 3: Wear tinfoil hats; it blocks their mind control rays.",
+        "Tip 4: Play loud polka music; it messes with their brainwaves.",
+        "Tip 5: Paint alien eyes on your walls; they’ll think they’re being watched.",
+        "Tip 6: Use mirrors to reflect alien beams back at them.",
+        "Tip 7: Aliens are terrified of rubber chickens. Keep one handy."
+    ];
+
+    const tipsContainer = document.getElementById('tips-container');
+
+    survivalTips.forEach((tip, index) => {
+        const tipElement = document.createElement('div');
+        tipElement.classList.add('tip');
+        tipElement.textContent = tip;
+        tipsContainer.appendChild(tipElement);
     });
 
 });
